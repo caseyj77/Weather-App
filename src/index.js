@@ -10,9 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
             return weather.fetchWeatherData();
         })
         .then((data) => {
+            console.log('Weather Data:', data); // Log the entire response data
             const domUpdater = new DOMUpdater();
-            domUpdater.updateData(data);
-            console.log('Weather Data:', data); // This can be replaced with your DOM update logic
+            domUpdater.updateData(data); // Ensure data is passed correctly
         })
         .catch((error) => {
             console.error('Error getting current location or fetching weather data:', error);
