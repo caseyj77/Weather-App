@@ -1,16 +1,20 @@
 import _ from 'lodash';
 import './style.css';
-import WeatherData from './weatherData.js';
-
+import WeatherData from './weatherData';
+import { DOMUpdater } from './updateDOM';
 
 document.addEventListener('DOMContentLoaded', () => {
     const weather = new WeatherData();
-    weather.fetchWeatherData();
+    weather.getCurrentLocation()
+        .then((location) => {
+            return weather.fetchWeatherData();
+        })
+        .then((data) => {
+            const domUpdater = new DOMUpdater();
+            domUpdater.updateData(data);
+            console.log('Weather Data:', data); // This can be replaced with your DOM update logic
+        })
+        .catch((error) => {
+            console.error('Error getting current location or fetching weather data:', error);
+        });
 });
-
-
-// https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/london?key=f4166c3d8a2e4747a50173115240907
-
-
-
-// https://api.weatherapi.com/v1/current.json
