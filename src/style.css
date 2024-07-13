@@ -1,52 +1,59 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
-  }
-  
-  .weather-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto auto;
-    gap: 10px;
-    width: 80%;
-    max-width: 600px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-  }
-  
-  #current-temp {
-    text-align: center;
-  }
-  
-  #weather-today {
-    text-align: center;
-  }
-  
-  #weather-times {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    text-align: center;
-  }
-  
-  #weather-three-day {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
-  }
-  
-  #weather-three-day div {
-    text-align: center;
-    padding: 10px;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #00c0e4, #eecb00); /* Gradient background */
+  color: #991c3a; /* Dark red text */
+}
+
+.weather-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto;
+  gap: 10px;
+  width: 80%;
+  max-width: 600px;
+  background-color: #fff; /* White container background for contrast */
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+#current-temp {
+  text-align: center;
+  color: #d67032; /* Accent color for heading */
+}
+
+#weather-today {
+  text-align: center;
+  color: #d67032; /* Accent color for heading */
+}
+
+#weather-times {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  text-align: center;
+}
+
+#weather-three-day {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+#weather-three-day div {
+  text-align: center;
+  padding: 10px;
+  background-color: #e09e2d; /* Accent color for div backgrounds */
+  border-radius: 4px;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+#weather-three-day div:hover {
+  background-color: #d67032; /* Darker accent color on hover */
+}
