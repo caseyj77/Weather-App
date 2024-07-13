@@ -40,10 +40,15 @@ body {
   text-align: center;
 }
 
+#weather-week {
+  text-align: center;
+}
+
 #weather-three-day {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr); /* Three columns for three days */
   gap: 10px;
+  text-align: center;
 }
 
 #weather-three-day div {
