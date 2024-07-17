@@ -1,16 +1,32 @@
-import WeatherData from "./weatherData";
+import WeatherData from './weatherData';
 
 class DOMUpdater extends WeatherData {
     constructor() {
         super();
+        // Current temperature elements
+        this.displayCurrentLocation = document.getElementById('display-location')
         this.currentTemp = document.getElementById('current-temp');
         this.currentTempValue = document.getElementById('current-temp-value');
-        this.weather8am = document.getElementById('weather-today-8am');
-        this.weather3pm = document.getElementById('weather-today-3pm');
-        this.weather8pm = document.getElementById('weather-today-8pm');
-        this.weatherDay1 = document.getElementById('weather-day-1');
-        this.weatherDay2 = document.getElementById('weather-day-2');
-        this.weatherDay3 = document.getElementById('weather-day-3');
+        this.currentIcon = document.getElementById('current-icon');
+        
+        // Today's weather elements
+        this.time8amValue = document.getElementById('time-8am-value');
+        this.time8amIcon = document.getElementById('time-8am-icon');
+        this.time3pmValue = document.getElementById('time-3pm-value');
+        this.time3pmIcon = document.getElementById('time-3pm-icon');
+        this.time8pmValue = document.getElementById('time-8pm-value');
+        this.time8pmIcon = document.getElementById('time-8pm-icon');
+        
+        // Three-day forecast elements
+        this.day1High = document.getElementById('day-1-high');
+        this.day1Low = document.getElementById('day-1-low');
+        this.day1Icon = document.getElementById('day-1-icon');
+        this.day2High = document.getElementById('day-2-high');
+        this.day2Low = document.getElementById('day-2-low');
+        this.day2Icon = document.getElementById('day-2-icon');
+        this.day3High = document.getElementById('day-3-high');
+        this.day3Low = document.getElementById('day-3-low');
+        this.day3Icon = document.getElementById('day-3-icon');
     }
 
     updateData(weatherData) {
@@ -18,40 +34,58 @@ class DOMUpdater extends WeatherData {
 
         // Ensure the icon URL has the correct protocol
         const cticonUrl = weatherData.current.condition.icon.startsWith('//') ? `https:${weatherData.current.condition.icon}` : weatherData.current.condition.icon;
-        
 
         // Update current temperature and icon
         if (this.currentTemp) {
             this.currentTempValue.textContent = `${weatherData.current.temp_f}°F`;
-            this.currentTemp.style.backgroundImage = `url(${cticonUrl})`;
+            this.currentIcon.style.backgroundImage = `url(${cticonUrl})`;
         } else {
             console.log('Current temp element not found'); // Debugging: Check if element exists
         }
 
+        const displayLocation = weatherData.location.name.region
+
         // Update today's weather
-        if (this.weather8am) {
-            this.weather8am.textContent = `8am: ${weatherData.forecast.forecastday[0].hour[8].temp_f}°F`;
+        const updateTimeWeather = (timeValueElem, timeIconElem, tempData, iconData, timeLabel) => {
+            if (timeValueElem) {
+                timeValueElem.textContent = `${timeLabel} ${tempData}°F`;
+                timeIconElem.style.backgroundImage = `url(${iconData})`;
+            }
+        };
+
+        updateTimeWeather(this.time8amValue, this.time8amIcon, weatherData.forecast.forecastday[0].hour[8].temp_f, weatherData.forecast.forecastday[0].hour[8].condition.icon, '8am:');
+        updateTimeWeather(this.time3pmValue, this.time3pmIcon, weatherData.forecast.forecastday[0].hour[15].temp_f, weatherData.forecast.forecastday[0].hour[15].condition.icon, '3pm:');
+        updateTimeWeather(this.time8pmValue, this.time8pmIcon, weatherData.forecast.forecastday[0].hour[20].temp_f, weatherData.forecast.forecastday[0].hour[20].condition.icon, '8pm:');
+
+        // Update three-day forecast
+        if (this.day1High) {
+            this.day1High.textContent = `High: ${weatherData.forecast.forecastday[1].day.maxtemp_f}°F`;
+        }
+        if (this.day1Low) {
+            this.day1Low.textContent = `Low: ${weatherData.forecast.forecastday[1].day.mintemp_f}°F`;
+        }
+        if (this.day1Icon) {
+            this.day1Icon.style.backgroundImage = `url(${weatherData.forecast.forecastday[1].day.condition.icon})`;
         }
 
-        if (this.weather3pm) {
-            this.weather3pm.textContent = `3pm: ${weatherData.forecast.forecastday[0].hour[15].temp_f}°F`;
+        if (this.day2High) {
+            this.day2High.textContent = `High: ${weatherData.forecast.forecastday[2].day.maxtemp_f}°F`;
+        }
+        if (this.day2Low) {
+            this.day2Low.textContent = `Low: ${weatherData.forecast.forecastday[2].day.mintemp_f}°F`;
+        }
+        if (this.day2Icon) {
+            this.day2Icon.style.backgroundImage = `url(${weatherData.forecast.forecastday[2].day.condition.icon})`;
         }
 
-        if (this.weather8pm) {
-            this.weather8pm.textContent = `8pm: ${weatherData.forecast.forecastday[0].hour[20].temp_f}°F`;
+        if (this.day3High) {
+            this.day3High.textContent = `High: ${weatherData.forecast.forecastday[3].day.maxtemp_f}°F`;
         }
-
-        // Update this week's weather
-        if (this.weatherDay1) {
-            this.weatherDay1.textContent = `First Day: ${weatherData.forecast.forecastday[1].day.maxtemp_f}°F`;
+        if (this.day3Low) {
+            this.day3Low.textContent = `Low: ${weatherData.forecast.forecastday[3].day.mintemp_f}°F`;
         }
-
-        if (this.weatherDay2) {
-            this.weatherDay2.textContent = `Second Day: ${weatherData.forecast.forecastday[2].day.maxtemp_f}°F`;
-        }
-
-        if (this.weatherDay3) {
-            this.weatherDay3.textContent = `Third Day: ${weatherData.forecast.forecastday[3].day.maxtemp_f}°F`;
+        if (this.day3Icon) {
+            this.day3Icon.style.backgroundImage = `url(${weatherData.forecast.forecastday[3].day.condition.icon})`;
         }
     }
 }
