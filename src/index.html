@@ -7,21 +7,60 @@
 <body>
     <div class="weather-container">
         <div id="current-temp">
-            <h2 id="current-date">Current Temp</h2>
-            <p id="current-temp-value">Loading...</p>
+            <h1 id="current-date">Current Temp</h1>
+                <h3 id="display-location">Loading...</h3>
+            <div class="current-temp-info">
+                <p id="current-temp-value">Loading...</p>
+                <div class="current-icon" id="current-icon"></div>
+            </div>
         </div>
         <div id="weather-today">
-            <h2>Today's weather</h2>
-            <div id="weather-today-8am">8am: Loading...</div>
-            <div id="weather-today-3pm">3pm: Loading...</div>
-            <div id="weather-today-8pm">8pm: Loading...</div>
+            <h2>Today's Weather</h2>
+            <div id="weather-times">
+                <div class="weather-time" id="weather-today-8am">
+                    <p class="time-label"></p>
+                    <p class="time-value" id="time-8am-value">Loading...</p>
+                    <div class="time-icon" id="time-8am-icon"></div>
+                </div>
+                <div class="weather-time" id="weather-today-3pm">
+                    <p class="time-label"></p>
+                    <p class="time-value" id="time-3pm-value">Loading...</p>
+                    <div class="time-icon" id="time-3pm-icon"></div>
+                </div>
+                <div class="weather-time" id="weather-today-8pm">
+                    <p class="time-label"></p>
+                    <p class="time-value" id="time-8pm-value">Loading...</p>
+                    <div class="time-icon" id="time-8pm-icon"></div>
+                </div>
+            </div>
         </div>
         <div id="weather-week">
-            <h2>This week's weather</h2>
+            <h2>Three Day Forecast</h2>
             <div id="weather-three-day">
-                <div id="weather-day-1">First Day: Loading...</div>
-                <div id="weather-day-2">Second Day: Loading...</div>
-                <div id="weather-day-3">Third Day: Loading...</div>
+                <div class="weather-day" id="weather-day-1">
+                    <div class="day-temp">
+                        <div id="day-of-week1">Loading...</div>
+                        <div id="day-1-high">High</div>
+                        <div id="day-1-low">Low</div>
+                    </div>
+                    <div class="day-icon" id="day-1-icon"></div>
+                </div>
+                <div class="weather-day" id="weather-day-2">
+                    <div class="day-temp">
+                        <div id="day-of-week2">Loading...</div>
+                        <div id="day-2-high">High</div>
+                        <div id="day-2-low">Low</div>
+                    </div>
+                    <div class="day-icon" id="day-2-icon"></div>
+                </div>
+                <div class="weather-day" id="weather-day-3">
+                    <div class="day-temp">
+                        <div id="day-of-week3">Loading...</div>
+                        <div id="day-3-high">High</div>
+                        <div id="day-3-low">Low</div>
+                    </div>
+                    <div class="day-icon" id="day-3-icon"></div>
+                </div>
             </div>
         </div>
     </div>

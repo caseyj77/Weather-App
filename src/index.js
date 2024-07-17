@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return weather.fetchWeatherData();
         })
         .then((data) => {
-            console.log('Weather Data:', data); // Log the entire response data
             const domUpdater = new DOMUpdater();
             domUpdater.updateData(data); // Ensure data is passed correctly
         })

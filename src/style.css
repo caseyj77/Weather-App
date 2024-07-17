@@ -6,8 +6,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: linear-gradient(135deg, #00c0e4, #eecb00); /* Gradient background */
-  color: #991c3a; /* Dark red text */
+  background: linear-gradient(135deg, #00c0e4, #eecb00);
+  color: #991c3a;
 }
 
 .weather-container {
@@ -17,7 +17,7 @@ body {
   gap: 10px;
   width: 80%;
   max-width: 600px;
-  background-color: #fff; /* White container background for contrast */
+  background-color: #fff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
@@ -25,40 +25,110 @@ body {
 
 #current-temp {
   text-align: center;
-  color: #d67032; /* Accent color for heading */
+}
+
+.current-temp-info {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#current-temp-value {
+  font-size: 2em;
+  color: #d67032;
+  margin-right: 10px;
+}
+
+.current-icon {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 #weather-today {
   text-align: center;
-  color: #d67032; /* Accent color for heading */
+  color: #991c3a;
 }
 
 #weather-times {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.weather-time {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #e09e2d;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.weather-time:hover {
+  background-color: #d67032;
+}
+
+.time-label {
+  margin-right: 5px;
+}
+
+.time-value {
+  font-size: 1.2em;
+  margin-right: 5px;
+}
+
+.time-icon {
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#weather-week {
+  text-align: center;
+  color: #991c3a;
+}
+
+#weather-three-day {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
   text-align: center;
 }
 
-#weather-week {
-  text-align: center;
-}
-
-#weather-three-day {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Three columns for three days */
-  gap: 10px;
-  text-align: center;
-}
-
-#weather-three-day div {
-  text-align: center;
+.weather-day {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   padding: 10px;
-  background-color: #e09e2d; /* Accent color for div backgrounds */
+  background-color: #e09e2d;
   border-radius: 4px;
-  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  transition: background-color 0.3s ease;
 }
 
-#weather-three-day div:hover {
-  background-color: #d67032; /* Darker accent color on hover */
+.weather-day:hover {
+  background-color: #d67032;
+}
+
+.day-temp {
+  display: flex;
+  flex-direction: column;
+}
+
+.day-high-temp, .day-low-temp {
+  font-size: 1.2em;
+}
+
+.day-icon {
+  width: 50px;
+  height: 50px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
