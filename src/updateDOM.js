@@ -8,7 +8,8 @@ class DOMUpdater extends WeatherData {
         this.currentTemp = document.getElementById('current-temp');
         this.currentTempValue = document.getElementById('current-temp-value');
         this.currentIcon = document.getElementById('current-icon');
-        
+        this.currentLocation = document.getElementById('current-location');
+
         // Today's weather elements
         this.time8amValue = document.getElementById('time-8am-value');
         this.time8amIcon = document.getElementById('time-8am-icon');
@@ -16,8 +17,11 @@ class DOMUpdater extends WeatherData {
         this.time3pmIcon = document.getElementById('time-3pm-icon');
         this.time8pmValue = document.getElementById('time-8pm-value');
         this.time8pmIcon = document.getElementById('time-8pm-icon');
-        
+
         // Three-day forecast elements
+        this.dayofweek1 = document.getElementById('day-of-week1');
+        this.dayofweek2 = document.getElementById('day-of-week2');
+        this.dayofweek3 = document.getElementById('day-of-week3');
         this.day1High = document.getElementById('day-1-high');
         this.day1Low = document.getElementById('day-1-low');
         this.day1Icon = document.getElementById('day-1-icon');
@@ -35,6 +39,14 @@ class DOMUpdater extends WeatherData {
         // Ensure the icon URL has the correct protocol
         const cticonUrl = weatherData.current.condition.icon.startsWith('//') ? `https:${weatherData.current.condition.icon}` : weatherData.current.condition.icon;
 
+        // Update current location
+        const displayLocation = `${weatherData.location.name}, ${weatherData.location.region}`;
+        if (this.displayCurrentLocation) {
+            this.displayCurrentLocation.textContent = displayLocation;
+        } else {
+            console.log('Current location element not found');
+        }
+
         // Update current temperature and icon
         if (this.currentTemp) {
             this.currentTempValue.textContent = `${weatherData.current.temp_f}°F`;
@@ -42,8 +54,6 @@ class DOMUpdater extends WeatherData {
         } else {
             console.log('Current temp element not found'); // Debugging: Check if element exists
         }
-
-        const displayLocation = weatherData.location.name.region
 
         // Update today's weather
         const updateTimeWeather = (timeValueElem, timeIconElem, tempData, iconData, timeLabel) => {
@@ -56,6 +66,21 @@ class DOMUpdater extends WeatherData {
         updateTimeWeather(this.time8amValue, this.time8amIcon, weatherData.forecast.forecastday[0].hour[8].temp_f, weatherData.forecast.forecastday[0].hour[8].condition.icon, '8am:');
         updateTimeWeather(this.time3pmValue, this.time3pmIcon, weatherData.forecast.forecastday[0].hour[15].temp_f, weatherData.forecast.forecastday[0].hour[15].condition.icon, '3pm:');
         updateTimeWeather(this.time8pmValue, this.time8pmIcon, weatherData.forecast.forecastday[0].hour[20].temp_f, weatherData.forecast.forecastday[0].hour[20].condition.icon, '8pm:');
+
+        // Update day of the week
+        const updateDayOfWeek = (dayOfWeekElem, dateStr) => {
+            if (dayOfWeekElem) {
+                const date = new Date(dateStr);
+                const dayOfWeek = date.toLocaleString('default', { weekday: 'long' });
+                dayOfWeekElem.textContent = dayOfWeek;
+            } else {
+                console.log('Day of week element not found');
+            }
+        };
+
+        updateDayOfWeek(this.dayofweek1, weatherData.forecast.forecastday[1].date); // Tomorrow
+        updateDayOfWeek(this.dayofweek2, weatherData.forecast.forecastday[2].date); // Day after tomorrow
+        updateDayOfWeek(this.dayofweek3, weatherData.forecast.forecastday[3].date); // Two days after tomorrow
 
         // Update three-day forecast
         if (this.day1High) {
