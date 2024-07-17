@@ -67,20 +67,29 @@ class DOMUpdater extends WeatherData {
         updateTimeWeather(this.time3pmValue, this.time3pmIcon, weatherData.forecast.forecastday[0].hour[15].temp_f, weatherData.forecast.forecastday[0].hour[15].condition.icon, '3pm:');
         updateTimeWeather(this.time8pmValue, this.time8pmIcon, weatherData.forecast.forecastday[0].hour[20].temp_f, weatherData.forecast.forecastday[0].hour[20].condition.icon, '8pm:');
 
-        // Update day of the week
         const updateDayOfWeek = (dayOfWeekElem, dateStr) => {
             if (dayOfWeekElem) {
-                const date = new Date(dateStr);
-                const dayOfWeek = date.toLocaleString('default', { weekday: 'long' });
+                // Split the date string and create a new date object using UTC
+                const dateParts = dateStr.split('-');
+                const date = new Date(Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2])); // Months are zero-indexed
+                // Get the day of the week, explicitly setting the time zone to UTC
+                const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+                console.log(`Updating day of week element: ${dateStr} -> ${dayOfWeek}`);
                 dayOfWeekElem.textContent = dayOfWeek;
             } else {
                 console.log('Day of week element not found');
             }
         };
-
+        
+        // Log the forecast dates
+        console.log('Forecast dates:', weatherData.forecast.forecastday.map(day => day.date));
+        
+        // Update day of the week
         updateDayOfWeek(this.dayofweek1, weatherData.forecast.forecastday[1].date); // Tomorrow
         updateDayOfWeek(this.dayofweek2, weatherData.forecast.forecastday[2].date); // Day after tomorrow
         updateDayOfWeek(this.dayofweek3, weatherData.forecast.forecastday[3].date); // Two days after tomorrow
+        
+        
 
         // Update three-day forecast
         if (this.day1High) {
