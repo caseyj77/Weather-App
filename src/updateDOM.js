@@ -17,13 +17,13 @@ class DOMUpdater extends WeatherData {
         console.log('Weather Data:', weatherData); // Debugging: Log weather data
 
         // Ensure the icon URL has the correct protocol
-        const iconUrl = weatherData.current.condition.icon.startsWith('//') ? `https:${weatherData.current.condition.icon}` : weatherData.current.condition.icon;
+        const cticonUrl = weatherData.current.condition.icon.startsWith('//') ? `https:${weatherData.current.condition.icon}` : weatherData.current.condition.icon;
         
 
         // Update current temperature and icon
         if (this.currentTemp) {
             this.currentTempValue.textContent = `${weatherData.current.temp_f}°F`;
-            this.currentTemp.style.backgroundImage = `url(${iconUrl})`;
+            this.currentTemp.style.backgroundImage = `url(${cticonUrl})`;
         } else {
             console.log('Current temp element not found'); // Debugging: Check if element exists
         }
