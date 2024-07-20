@@ -74,7 +74,7 @@ class DOMUpdater extends WeatherData {
                 const date = new Date(Date.UTC(dateParts[0], dateParts[1] - 1, dateParts[2])); // Months are zero-indexed
                 // Get the day of the week, explicitly setting the time zone to UTC
                 const dayOfWeek = date.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
-                console.log(`Updating day of week element: ${dateStr} -> ${dayOfWeek}`);
+                // console.log(`Updating day of week element: ${dateStr} -> ${dayOfWeek}`);
                 dayOfWeekElem.textContent = dayOfWeek;
             } else {
                 console.log('Day of week element not found');
@@ -82,7 +82,7 @@ class DOMUpdater extends WeatherData {
         };
         
         // Log the forecast dates
-        console.log('Forecast dates:', weatherData.forecast.forecastday.map(day => day.date));
+        // console.log('Forecast dates:', weatherData.forecast.forecastday.map(day => day.date));
         
         // Update day of the week
         updateDayOfWeek(this.dayofweek1, weatherData.forecast.forecastday[1].date); // Tomorrow
